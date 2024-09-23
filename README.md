@@ -32,17 +32,26 @@ Siga os passos abaixo para configurar e rodar a aplicação:
     docker-compose up -d
     ```
 
-3. **Executar as migrações do banco de dados:**
+3. **Instalar Dependências com Composer:**
+
+    ```bash
+    composer install
+    ```
+
+4. **Executar as migrações do banco de dados:**
 
     ```bash
     php artisan migrate
     ```
 
-4. **Popular o banco de dados com dados iniciais:**
+5. **Popular o banco de dados com dados iniciais:**
 
     ```bash
     php artisan db:seed
     ```
+
+- **Instruções no Docker**: A partir do passo 3 deve ser executado diretamente no container.
+- **Observação**: Não se esqueça de configurar as variáveis de ambiente, arquivo `.env`.
 
 ## API - Rotas
 
