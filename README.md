@@ -4,9 +4,9 @@
 
 Esta API Restful oferece funcionalidades para gerenciar Clientes, Produtos e Pedidos, com suporte completo para operações CRUDL (Criar, Ler, Atualizar, Deletar e Listar). O sistema foi desenvolvido com PHP 8.2 e Laravel 11, utilizando Docker para facilitar a configuração e a execução do ambiente.
 
-• Clientes nome, e-mail, telefone, data de nascimento, endereço, complemento, bairro, cep, data de cadastro;
-• Produtos nome, preço, foto;
-• Pedidos código do cliente, código do produto, data da criação;
+- Clientes nome, e-mail, telefone, data de nascimento, endereço, complemento, bairro, cep, data de cadastro;
+- Produtos nome, preço, foto;
+- Pedidos código do cliente, código do produto, data da criação;
 
 **Autor:** Gustavo Ribeiro Bailo Silva
 
