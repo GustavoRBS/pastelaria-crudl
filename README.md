@@ -32,7 +32,7 @@ Siga os passos abaixo para configurar e rodar a aplicação:
     docker-compose up -d
     ```
 
-3. **Instalar Dependências com Composer::**
+3. **Instalar Dependências com Composer:**
 
     ```bash
     composer install
