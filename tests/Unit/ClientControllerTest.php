@@ -84,6 +84,19 @@ class ClientControllerTest extends TestCase
         $this->assertContains('The email has already been taken.', $response->json('data.email'));
     }
 
+    public function test_create_client_missing_fields()
+    {
+        $response = $this->post('/api/client/create', [
+            'email' => 'client@example.com',
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonStructure([
+            'message',
+            'data' => ['name', 'phone', 'birth_date', 'address', 'neighborhood', 'postal_code']
+        ]);
+    }
+
     public function test_get_client_successfully()
     {
         $client = Client::factory()->create([
@@ -131,6 +144,22 @@ class ClientControllerTest extends TestCase
         $response->assertJsonFragment([
             'email' => 'new_email@example.com',
             'name' => 'New Name'
+        ]);
+    }
+
+    public function test_update_client_validation_error()
+    {
+        $client = Client::factory()->create();
+
+        $response = $this->put('/api/client/detail/' . $client->id, [
+            'email' => 'invalid-email',
+            'name' => '',
+        ]);
+
+        $response->assertStatus(422);
+        $response->assertJsonStructure([
+            'message',
+            'data' => ['email', 'name']
         ]);
     }
 

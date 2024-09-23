@@ -15,6 +15,12 @@ class OrderControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->seed();
+    }
+
     public function test_get_list_orders_successfully()
     {
         $orderClient = OrdersClient::factory()->create();
@@ -55,7 +61,6 @@ class OrderControllerTest extends TestCase
             'order_id' => $orderClient->id,
         ]);
     }
-
 
     public function test_get_order_successfully()
     {
@@ -99,5 +104,66 @@ class OrderControllerTest extends TestCase
 
         $this->assertNotNull(Order::withTrashed()->find($order->id)->deleted_at);
         $this->assertEquals(202, $response->getStatusCode());
+    }
+
+    public function test_create_order_without_client_id()
+    {
+        $product1 = Product::factory()->create();
+        $request = new Request(['product_ids' => [$product1->id]]);
+
+        $controller = new OrderController();
+        $response = $controller->createOrder($request);
+
+        $this->assertEquals(422, $response->getStatusCode());
+        $this->assertTrue($response->original['data']->has('client_id'));
+    }
+
+    public function test_create_order_with_invalid_product_id()
+    {
+        $client = Client::factory()->create();
+        $request = new Request([
+            'client_id' => $client->id,
+            'product_ids' => [9999]
+        ]);
+
+        $controller = new OrderController();
+        $response = $controller->createOrder($request);
+
+        $this->assertEquals(422, $response->getStatusCode());
+
+        $this->assertInstanceOf(\Illuminate\Support\MessageBag::class, $response->original['data']);
+
+        $this->assertTrue($response->original['data']->has('product_ids.0'));
+    }
+
+    public function test_get_order_not_found()
+    {
+        $controller = new OrderController();
+        $response = $controller->getOrder(9999);
+
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertEquals('Order not found.', $response->original['message']);
+    }
+
+    public function test_update_order_not_found()
+    {
+        $client = Client::factory()->create();
+        $product = Product::factory()->create();
+
+        $controller = new OrderController();
+        $request = new Request(['client_id' => $client->id, 'product_id' => $product->id]);
+        $response = $controller->updateOrder($request, 9999);
+
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertEquals('Order not found.', $response->original['message']);
+    }
+
+    public function test_delete_order_not_found()
+    {
+        $controller = new OrderController();
+        $response = $controller->deleteOrder(9999);
+
+        $this->assertEquals(404, $response->getStatusCode());
+        $this->assertEquals('Order not found.', $response->original['message']);
     }
 }
