@@ -4,30 +4,9 @@
 
 Esta API Restful oferece funcionalidades para gerenciar Clientes, Produtos e Pedidos, com suporte completo para operações CRUDL (Criar, Ler, Atualizar, Deletar e Listar). O sistema foi desenvolvido com PHP 8.2 e Laravel 11, utilizando Docker para facilitar a configuração e a execução do ambiente.
 
-### Estrutura das Tabelas
-
--   **Clientes**:
-
-    -   `nome`: Nome do cliente.
-    -   `email`: E-mail do cliente.
-    -   `telefone`: Telefone do cliente.
-    -   `data_nascimento`: Data de nascimento do cliente.
-    -   `endereco`: Endereço do cliente.
-    -   `complemento`: Complemento do endereço (opcional).
-    -   `bairro`: Bairro do cliente.
-    -   `cep`: Código postal do cliente.
-    -   `data_cadastro`: Data em que o cliente foi cadastrado.
-
--   **Produtos**:
-
-    -   `nome`: Nome do produto.
-    -   `preco`: Preço do produto.
-    -   `foto`: URL da imagem do produto.
-
--   **Pedidos**:
-    -   `cliente_id`: ID do cliente que fez o pedido.
-    -   `produto_id`: ID do produto solicitado.
-    -   `data_criacao`: Data em que o pedido foi criado.
+• Clientes nome, e-mail, telefone, data de nascimento, endereço, complemento, bairro, cep, data de cadastro;
+• Produtos nome, preço, foto;
+• Pedidos código do cliente, código do produto, data da criação;
 
 **Autor:** Gustavo Ribeiro Bailo Silva
 
@@ -43,21 +22,18 @@ Siga os passos abaixo para configurar e rodar a aplicação:
 
 1. **Build da Aplicação**:
 
-    ````bash
+    ```bash
     docker-compose build
 
     1. **Iniciar os containers:**:
-    ```bash
     docker-compose build
 
     3. **Executar as migrações do banco de dados:**
-    ```bash
     docker-compose build
 
     4. **Popular o banco de dados com dados iniciais:**
-    ```bash
     docker-compose build
-    ````
+    ```
 
 ## API - Rotas
 
@@ -94,3 +70,6 @@ Siga os passos abaixo para configurar e rodar a aplicação:
 ## Testes Unitários
 
 Para executar os testes unitários, utilize o seguinte comando:
+
+```bash
+php artisan test tests/Unit
