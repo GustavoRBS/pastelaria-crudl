@@ -1,4 +1,4 @@
-# API Restful - Gestão de Clientes, Produtos e Pedidos
+# API Restful - Pastelaria
 
 ## Sobre o Projeto
 
