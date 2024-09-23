@@ -26,22 +26,22 @@ Siga os passos abaixo para configurar e rodar a aplicação:
     docker-compose build
     ```
 
-2. **Iniciar os containers:**:
+2. **Iniciar os containers:**
 
     ```bash
-   docker-compose build
+    docker-compose up -d
     ```
 
- 3. **Executar as migrações do banco de dados:**
+3. **Executar as migrações do banco de dados:**
 
-    ````bash
-    docker-compose build
-     ```
+    ```bash
+    php artisan migrate
+    ```
 
 4. **Popular o banco de dados com dados iniciais:**
 
     ```bash
-    docker-compose build
+    php artisan db:seed
     ```
 
 ## API - Rotas
@@ -82,4 +82,4 @@ Para executar os testes unitários, utilize o seguinte comando:
 
 ```bash
 php artisan test tests/Unit
-````
+```
