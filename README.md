@@ -50,8 +50,8 @@ Siga os passos abaixo para configurar e rodar a aplicação:
     php artisan db:seed
     ```
 
-- **Instruções no Docker**: A partir do passo 3, cada comando indica que deve ser executado diretamente no container.
-- **Observação**: Adicionei uma observação para lembrar sobre a configuração do arquivo `.env`.
+- **Instruções no Docker**: A partir do passo 3 deve ser executado diretamente no container.
+- **Observação**: Não se esqueça de configurar as variáveis de ambiente, arquivo `.env`.
 
 ## API - Rotas
 
